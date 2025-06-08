@@ -88,8 +88,6 @@ A interface será aberta em http://localhost:3000
 ## 📊 Exemplo de gráfico
 
 O gráfico exibe o número de usuários por comportamento:
-````
-![gráfico de barras com 4 usuários ativos e dois inativo](image.png)
 
 ![gráfico de barras com 4 usuários ativos e dois inativo](https://github.com/marcanogc/projeto-final-fullstack/blob/main/image.png)
 
