@@ -17,23 +17,17 @@ app.use(express.json()); // permite receber JSON no body das requisições
 // Rotas
 app.use('/api/usuarios', usuariosRoutes); // usa as rotas de usuários com prefixo /api/usuarios
 
-// Rota de teste
-app.get('/', (req, res) => {
-  res.send('API rodando com sucesso!');
-});
-
-//================PARA PRODUÇÃO================
 // Serve arquivos estáticos da build do React
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// Serve arquivos estáticos do React (apenas se a pasta build existir)
-const buildPath = path.join(__dirname, '../frontend/build');
+// Rota para servir SPA React, ignorando rotas que começam com /api
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-//=====================COMENTADO PARA TESTAR EN LOCAL==============
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-// });
+  app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+  });
+}
 
 // Sincroniza banco de dados e inicia o servidor
 db.sequelize.sync().then(() => {
