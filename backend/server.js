@@ -30,10 +30,10 @@ app.use(express.static(path.join(__dirname, '../frontend/build')));
 const buildPath = path.join(__dirname, '../frontend/build');
 
 //=====================COMENTADO PARA TESTAR EN LOCAL==============
-// app.use(express.static(path.join(__dirname, '../frontend/build')));
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
-// });
+ app.use(express.static(path.join(__dirname, '../frontend/build')));
+ app.get('*', (req, res) => {
+   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+ });
 
 // Sincroniza banco de dados e inicia o servidor
 db.sequelize.sync().then(() => {
